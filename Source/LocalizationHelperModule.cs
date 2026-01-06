@@ -10,7 +10,7 @@ namespace Celeste.Mod.LocalizationHelper;
 
 public class LocalizationHelperModule : EverestModule {
     public static LocalizationHelperModule Instance { get; private set; }
-    public AssetTranslator assetTranslator = new();
+    public TextureTranslator textureTranslator = new();
 
     public LocalizationHelperModule() {
         Instance = this;
@@ -28,8 +28,8 @@ public class LocalizationHelperModule : EverestModule {
         base.Initialize();
 
         foreach (ModContent mod in Everest.Content.Mods) {
-            if (mod.Map.TryGetValue("LocalizationAssets.json", out ModAsset asset)) {
-                assetTranslator.AddJsonToTextureMap(asset);
+            if (mod.Map.TryGetValue("LocalizationTextures.json", out ModAsset asset)) {
+                textureTranslator.AddJsonToTextureMap(asset);
             }
         }
     }
