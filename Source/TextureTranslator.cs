@@ -41,6 +41,17 @@ public class TextureTranslator {
         return fullKey;
     }
 
+    public string GetLocalizedTexture(string key, Atlas atlas) {
+        if (key == null) return null;
+
+        Language lang = Dialog.Language;
+        if (lang == null) return key;
+        
+        string localizedKey = textures?.GetValueOrDefault(GetFullKey(key, atlas))?.GetValueOrDefault(lang.Id);
+
+        return localizedKey != null ? GetShortKey(localizedKey, atlas) : key;
+    }
+
     public string GetOriginalTextureFromLocalized(string localizedKey, Atlas atlas) {
         foreach (var kv in textures) {
             if (kv.Value.GetValueOrDefault(Dialog.Language.Id) == GetFullKey(localizedKey, atlas)) {
@@ -52,11 +63,7 @@ public class TextureTranslator {
 
     public string this[string key, Atlas atlas] {
         get {
-            if (key == null) return null;
-
-            string localizedKey = textures?.GetValueOrDefault(GetFullKey(key, atlas))?.GetValueOrDefault(Dialog.Language.Id);
-
-            return localizedKey != null ? GetShortKey(localizedKey, atlas) : key;
+            return GetLocalizedTexture(key, atlas);
         }
     }
 }

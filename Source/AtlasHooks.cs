@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Mono.Cecil.Cil;
 using Monocle;
+using MonoMod.Cil;
 using MonoMod.RuntimeDetour;
 
 namespace Celeste.Mod.LocalizationHelper;
@@ -17,23 +19,27 @@ public static class AtlasHooks {
         return orig(self, LocalizationHelperModule.Instance.textureTranslator[key, self], defaultTexture);
     }
 
-    private static MTexture Hook_GetAtlasSubtextureFromAtlasAt(On.Monocle.Atlas.orig_GetAtlasSubtextureFromAtlasAt orig, Atlas self, string key, int index) {
-        // Probably better way to do with IL Hooks but went with basically copy-pasting the code for now, surely no one is hooking that
-        TextureTranslator translator = LocalizationHelperModule.Instance.textureTranslator;
-        string localizedKey = translator[key, self];
-        if (index == 0 && self.textures.TryGetValue(localizedKey, out MTexture value)) {
-            return value;
+    private static void Hook_GetAtlasSubtextureFromAtlasAt(ILContext il) {
+        ILCursor cursor = new(il);
+        
+        while (cursor.TryGotoNext(
+            MoveType.Before,
+            instr => instr.MatchCallvirt<Dictionary<string, MTexture>>("ContainsKey")
+                    || instr.MatchCallvirt<Dictionary<string, MTexture>>("get_Item")
+        )) {
+            cursor.Emit(OpCodes.Ldarg_0);
+            cursor.EmitDelegate(LocalizationHelperModule.Instance.textureTranslator.GetLocalizedTexture);
+            cursor.Index++;
         }
-        string text = index.ToString();
-        int length = text.Length;
-        while (text.Length < length + 6) {
-            localizedKey = translator[key + text, self];
-            if (self.textures.TryGetValue(localizedKey, out MTexture result)) {
-                return result;
-            }
-            text = "0" + text;
+
+        cursor.Index = 0;
+        while (cursor.TryGotoNext(
+            MoveType.After,
+            instr => instr.MatchCall<string>("Concat")
+        )) {
+            cursor.Emit(OpCodes.Ldarg_0);
+            cursor.EmitDelegate(LocalizationHelperModule.Instance.textureTranslator.GetLocalizedTexture);
         }
-        return null;
     }
 
     private static MTexture Hook_GetLinkedTexture(On.Monocle.Atlas.orig_GetLinkedTexture orig, Atlas self, string key) {
@@ -48,7 +54,7 @@ public static class AtlasHooks {
     public static void Load() {
         On.Monocle.Atlas.GetAtlasSubtextures += Hook_GetAtlasSubtextures;
         On.Monocle.Atlas.GetOrDefault += Hook_GetOrDefault;
-        On.Monocle.Atlas.GetAtlasSubtextureFromAtlasAt += Hook_GetAtlasSubtextureFromAtlasAt;
+        IL.Monocle.Atlas.GetAtlasSubtextureFromAtlasAt += Hook_GetAtlasSubtextureFromAtlasAt;
         On.Monocle.Atlas.GetLinkedTexture += Hook_GetLinkedTexture;
         CreateGetItemHook();
     }
@@ -56,7 +62,7 @@ public static class AtlasHooks {
     public static void Unload() {
         On.Monocle.Atlas.GetAtlasSubtextures -= Hook_GetAtlasSubtextures;
         On.Monocle.Atlas.GetOrDefault -= Hook_GetOrDefault;
-        On.Monocle.Atlas.GetAtlasSubtextureFromAtlasAt -= Hook_GetAtlasSubtextureFromAtlasAt;
+        IL.Monocle.Atlas.GetAtlasSubtextureFromAtlasAt -= Hook_GetAtlasSubtextureFromAtlasAt;
         On.Monocle.Atlas.GetLinkedTexture -= Hook_GetLinkedTexture;
         hook_AtlasGetItem?.Dispose();
         hook_AtlasGetItem = null;
