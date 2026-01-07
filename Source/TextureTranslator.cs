@@ -47,14 +47,14 @@ public class TextureTranslator {
         Language lang = Dialog.Language;
         if (lang == null) return key;
         
-        string localizedKey = textures?.GetValueOrDefault(GetFullKey(key, atlas))?.GetValueOrDefault(lang.Id);
+        string localizedKey = textures?.GetValueOrDefault(lang.Id)?.GetValueOrDefault(GetFullKey(key, atlas));
 
         return localizedKey != null ? GetShortKey(localizedKey, atlas) : key;
     }
 
     public string GetOriginalTextureFromLocalized(string localizedKey, Atlas atlas) {
-        foreach (var kv in textures) {
-            if (kv.Value.GetValueOrDefault(Dialog.Language.Id) == GetFullKey(localizedKey, atlas)) {
+        foreach (var kv in textures.GetValueOrDefault(Dialog.Language.Id) ?? []) {
+            if (kv.Value == GetFullKey(localizedKey, atlas)) {
                 return GetShortKey(kv.Key, atlas);
             }
         }

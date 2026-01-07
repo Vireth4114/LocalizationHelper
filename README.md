@@ -9,12 +9,12 @@ Put a `LocalizationTextures.json` in your mod root folder to specify the new tex
 It has this format:
 ```
 {
-  Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/stuff1": {
-    "french": "Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/french_stuff1",
-    "german": "Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/german_stuff1"
-  },
-  "Graphics/Atlases/Portraits/stuff/ExampleMap/memo_title": {
-    "french": "Graphics/Atlases/Portraits/stuff/ExampleMap/french_memo_title"
+  "french": {
+    "Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/stuff1": "Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/french_stuff1",
+    "Graphics/Atlases/Portraits/stuff/ExampleMap/memo_title": "Graphics/Atlases/Portraits/stuff/ExampleMap/french_memo_title"
+  }, 
+  "german": {
+    "Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/stuff1": "Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/german_stuff1"
   }
 }
 ```
