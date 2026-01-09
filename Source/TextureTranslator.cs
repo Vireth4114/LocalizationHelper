@@ -2,29 +2,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using Monocle;
+using Celeste.Mod.LocalizationHelper.Format;
 
 namespace Celeste.Mod.LocalizationHelper;
 
 public class TextureTranslator {
     private readonly Dictionary<string, Dictionary<string, string>> textures = [];
 
-    public void AddJsonToTextureMap(ModAsset asset) {
-        if (asset == null) {
-            return;
-        }
-
-        string json;
-        using (var reader = new StreamReader(asset.Stream)) {
-            json = reader.ReadToEnd();
-        }
-
-        try {
-            var parsedTextures = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(json);
+    public void AddToTextureMap(LocalizationFile file) {
+        if (file.TryDeserialize(out var parsedTextures)) {
             foreach (var kv in parsedTextures) {
                 textures[kv.Key] = kv.Value;
             }
-        } catch (JsonException e) {
-            Logger.Error("LocalizationHelper", $"Failed to parse {asset.PathVirtual}: {e}");
+        } else {
+            Logger.Error("LocalizationHelper", $"Failed to parse {file.modAsset.PathVirtual}");
         }
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
+using Celeste.Mod.LocalizationHelper.Format;
 using Monocle;
 using MonoMod.RuntimeDetour;
 
@@ -28,8 +29,12 @@ public class LocalizationHelperModule : EverestModule {
         base.Initialize();
 
         foreach (ModContent mod in Everest.Content.Mods) {
-            if (mod.Map.TryGetValue("LocalizationTextures.json", out ModAsset asset)) {
-                textureTranslator.AddJsonToTextureMap(asset);
+            if (mod.Map.TryGetValue("LocalizationTextures", out ModAsset asset)) {
+                textureTranslator.AddToTextureMap(new LocalizationFile(asset));
+            }
+            
+            if (mod.Map.TryGetValue("LocalizationTextures.json", out ModAsset jsonAsset)) {
+                textureTranslator.AddToTextureMap(new JsonLocalizationFile(jsonAsset));
             }
         }
     }
