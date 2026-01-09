@@ -4,19 +4,15 @@ Helper to localize textures in your mods
 
 ## Usage
 
-Put a `LocalizationTextures.json` in your mod root folder to specify the new texture for each language.
+Put a `LocalizationTextures.yaml` in your mod root folder to specify the new texture for each language.
 
 It has this format:
 ```
-{
-  "french": {
-    "Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/stuff1": "Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/french_stuff1",
-    "Graphics/Atlases/Portraits/stuff/ExampleMap/memo_title": "Graphics/Atlases/Portraits/stuff/ExampleMap/french_memo_title"
-  }, 
-  "german": {
-    "Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/stuff1": "Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/german_stuff1"
-  }
-}
+french:
+  Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/stuff1: Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/french_stuff1
+  Graphics/Atlases/Portraits/stuff/ExampleMap/memo_title: Graphics/Atlases/Portraits/stuff/ExampleMap/french_memo_title
+german:
+  Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/stuff1: Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/german_stuff1
 ```
 You can name the localized textures however you want, but you have to put them in the same data path than the original texture.
 
