@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Monocle;
 using Celeste.Mod.LocalizationHelper.Formats;
+using Celeste.Mod.LocalizationHelper.Utils;
 
 namespace Celeste.Mod.LocalizationHelper;
 

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Celeste.Mod.LocalizationHelper;
+namespace Celeste.Mod.LocalizationHelper.Utils;
 
 public class MetadatasManager {
     public static bool IsAliasPresent(Dictionary<string, Dictionary<string, Dictionary<string, string>>> parsedFile)
