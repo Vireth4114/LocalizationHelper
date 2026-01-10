@@ -1,0 +1,10 @@
+Vireth_LocalizationHelper_Bleh=
+[MADELINE left normal]
+You look ugly
+[??? right normal]
+I was made in 2 minutes :3
+I don't even have a portrait
+[MADELINE left distracted]
+I guess you're here to test animated sprites
+[??? right normal]
+Yep, did you know I'm blue in French ?{n}And I have a super secret frame in japanese

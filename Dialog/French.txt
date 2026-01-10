@@ -1,0 +1,5 @@
+Vireth_LocalizationHelper_Bleh=
+[??? right normal]
+Je suis bleu
+[MADELINE left normal]
+bleh
