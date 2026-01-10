@@ -71,7 +71,7 @@ languages:
     stuff1: Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/italian_stuff1
 ```
 
-Less repetition! The name is clear, the path is only written one time, making it easier to update it in case.
+Less repetition! The name is clear, the path is only written one time, making it easier to update it if needed.
 
 ## Language IDs
 
