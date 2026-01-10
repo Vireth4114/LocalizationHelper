@@ -19,10 +19,12 @@ public class LocalizationHelperModule : EverestModule {
 
     public override void Load() {
         AtlasHooks.Load();
+        LanguageHooks.Load();
     }
 
     public override void Unload() {
         AtlasHooks.Unload();
+        LanguageHooks.Unload();
     }
 
     public override void Initialize() {
