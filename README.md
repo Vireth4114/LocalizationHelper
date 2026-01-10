@@ -34,12 +34,12 @@ Depending on your usage, you may need more advanced features to ease your Locali
 
 > **BE CAREFUL** of the formatting. When using the advanced format, the yaml has to follow the structure metadatas > (aliases, etc.) and languages > (the languages where the localization happen)!  
 
-> *There is currently only aliases in the advanced format, but more is planned to be added, such as frame handling! [See the related issue](https://github.com/Vireth4114/LocalizationHelper/issues/3).  
+> *There is currently only aliases in the advanced format, but more is planned to be added, such as frame handling! [See the related issue](https://github.com/Vireth4114/LocalizationHelper/issues/3).*  
 
 #### Aliases
 
 If you start to have a lot of languages localized in your file, you can end up in the case where you specify the same original texture in your `.yaml` file.  
-This can lead to issues when moving assets to different folders or merging multiple folders, as it can break the Localization. Fortunately, **aliases** are here to solve this issue.  
+This can lead to issues when moving assets to different folders or merging multiple folders, as it can break the localization. Fortunately, **aliases** are here to solve this issue.  
 
 For example, you have this starting `LocalizationTextures.yaml` file:
 
