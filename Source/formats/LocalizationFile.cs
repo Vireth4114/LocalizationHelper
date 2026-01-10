@@ -1,10 +1,8 @@
-using System.Collections.Generic;
-
-namespace Celeste.Mod.LocalizationHelper.Format;
+namespace Celeste.Mod.LocalizationHelper.Formats;
 public class LocalizationFile(ModAsset asset) {
     public ModAsset modAsset = asset;
 
-    public virtual bool TryDeserialize(out Dictionary<string, Dictionary<string, string>> result) {
+    public virtual bool TryDeserialize<T>(out T result) {
         return modAsset.TryDeserialize(out result);
     }
 }

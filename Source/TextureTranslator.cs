@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using Monocle;
-using Celeste.Mod.LocalizationHelper.Format;
+using Celeste.Mod.LocalizationHelper.Formats;
 
 namespace Celeste.Mod.LocalizationHelper;
 
@@ -10,7 +8,16 @@ public class TextureTranslator {
     private readonly Dictionary<string, Dictionary<string, string>> textures = [];
 
     public void AddToTextureMap(LocalizationFile file) {
-        if (file.TryDeserialize(out var parsedTextures)) {
+        if (file.TryDeserialize(out Dictionary<string, Dictionary<string, Dictionary<string, string>>> parsedLanguagesMetadatas)) {
+            bool isAliasPresent = MetadatasManager.IsAliasPresent(parsedLanguagesMetadatas);
+            foreach (var kv in parsedLanguagesMetadatas["languages"]) {
+                if (isAliasPresent) {
+                    MetadatasManager.AssociateAliasWithPath(parsedLanguagesMetadatas["metadatas"]["aliases"], kv, textures);
+                } else {
+                    textures[kv.Key] = kv.Value;
+                }
+            }
+        } else if (file.TryDeserialize(out Dictionary<string, Dictionary<string, string>> parsedTextures)) {
             foreach (var kv in parsedTextures) {
                 textures[kv.Key] = kv.Value;
             }

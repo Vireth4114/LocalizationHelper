@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Metadata;
-using Celeste.Mod.LocalizationHelper.Format;
-using Monocle;
-using MonoMod.RuntimeDetour;
+﻿using Celeste.Mod.LocalizationHelper.Formats;
 
 namespace Celeste.Mod.LocalizationHelper;
 
