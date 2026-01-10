@@ -1,0 +1,57 @@
+{
+  "metadatas": {
+    "aliases": {
+      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/canada",
+      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/canada"
+    }
+  },
+  "languages": {
+    "brazilian": {
+      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/brazil",
+      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/brazil"
+    },
+    "french": {
+      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/france",
+      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/france",
+      "Graphics/Atlases/Gameplay/bgs/Vireth/LocalizationHelper/background": "Graphics/Atlases/Gameplay/bgs/Vireth/LocalizationHelper/french_background",
+      "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle00": "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle00",
+      "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle01": "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle01",
+      "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle02": "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle02",
+      "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle03": "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle03",
+      "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle04": "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle04",
+      "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle05": "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle05",
+      "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle06": "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle06",
+      "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle07": "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle07",
+      "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle08": "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle08"
+    },
+    "german": {
+      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/germany",
+      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/germany"
+    },
+    "italian": {
+      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/italy",
+      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/italy"
+    },
+    "japanese": {
+      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/japan",
+      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/japan",
+      "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle03": "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/japanese_bleh/idle03"
+    },
+    "korean": {
+      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/korea",
+      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/korea"
+    },
+    "russian": {
+      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/russia",
+      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/russia"
+    },
+    "schinese": {
+      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/china",
+      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/china"
+    },
+    "spanish": {
+      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/spain",
+      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/spain"
+    }
+  }
+}
