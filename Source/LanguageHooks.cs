@@ -1,11 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using Mono.Cecil.Cil;
-using Monocle;
-using MonoMod.Cil;
-using MonoMod.RuntimeDetour;
-
 namespace Celeste.Mod.LocalizationHelper;
 
 public static class LanguageHooks {
