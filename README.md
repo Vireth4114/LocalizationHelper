@@ -8,7 +8,7 @@ Helper to localize textures in your mods
   - [Simple format](#Simple-format)
   - [Advanced format](#Advanced-format)
     - [Aliases](#Aliases)
-  - [Languages IDs](#Languages-IDs)
+- [Languages IDs](#Languages-IDs)
 
 ## Usage
 
@@ -73,7 +73,7 @@ languages:
 
 Less repetition! The name is clear, the path is only written one time, making it easier to update it in case.
 
-### Language IDs
+## Language IDs
 
 The language IDs are the ones used by Celeste, that is:
 
