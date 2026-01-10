@@ -1,5 +1,5 @@
 - Name: LocalizationHelper
-  Version: 1.2.0
+  Version: 1.2.1
   DLL: bin/LocalizationHelper.dll
   Dependencies:
     - Name: EverestCore
