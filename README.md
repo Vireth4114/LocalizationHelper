@@ -8,7 +8,7 @@ Helper to localize textures in your mods
   - [Simple format](#Simple-format)
   - [Advanced format](#Advanced-format)
     - [Aliases](#Aliases)
-- [Languages IDs](#Languages-IDs)
+- [Language IDs](#Language-IDs)
 
 ## Usage
 
