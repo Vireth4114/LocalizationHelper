@@ -10,8 +10,16 @@ public class TextureTranslator {
 
     public void AddToTextureMap(LocalizationFile file) {
         if (file.TryDeserialize(out Dictionary<string, Dictionary<string, Dictionary<string, string>>> parsedLanguagesMetadatas)) {
+            // If the file contains 3 levels of deepness, we consider they have adopted the metadatas/languages structure and handle the file accordingly
+            if (!parsedLanguagesMetadatas.TryGetValue("languages", out Dictionary<string, Dictionary<string, string>> languages)) {
+                Logger.Error("LocalizationHelper", 
+                    "The \"languages\" key is missing. Probably written with a typo. " + 
+                    "Make sure your translated languages are under this key if you're using the format with the metadatas key."
+                );
+                return;
+            }
             bool isAliasPresent = MetadatasManager.IsAliasPresent(parsedLanguagesMetadatas);
-            foreach (var kv in parsedLanguagesMetadatas["languages"]) {
+            foreach (var kv in languages) {
                 if (isAliasPresent) {
                     MetadatasManager.AssociateAliasWithPath(parsedLanguagesMetadatas["metadatas"]["aliases"], kv, textures);
                 } else {
