@@ -26,9 +26,7 @@ public class LocalizationHelperModule : EverestModule {
         foreach (ModContent mod in Everest.Content.Mods) {
             if (mod.Map.TryGetValue("LocalizationTextures", out ModAsset asset)) {
                 textureTranslator.AddToTextureMap(new LocalizationFile(asset));
-            }
-            
-            if (mod.Map.TryGetValue("LocalizationTextures.json", out ModAsset jsonAsset)) {
+            } else if (mod.Map.TryGetValue("LocalizationTextures.json", out ModAsset jsonAsset)) {
                 textureTranslator.AddToTextureMap(new JsonLocalizationFile(jsonAsset));
             }
         }
