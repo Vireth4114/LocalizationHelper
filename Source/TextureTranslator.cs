@@ -30,6 +30,13 @@ public class TextureTranslator {
         }
     }
 
+    /// <summary>
+    /// This method applies all modifiers possible to the given textures. Such as metadatas or parameters.
+    /// This method is non-destructive, it doesn't modify the textures parameter.
+    /// </summary>
+    /// <param name="textures">The textures to apply the modifiers to</param>
+    /// <param name="metadatas">The metadatas to use, if available</param>
+    /// <returns>An updated version of textures</returns>
     public static Dictionary<string, string> ApplyTexturesModifiers(
         Dictionary<string, string> textures,
         Dictionary<string, Dictionary<string, string>> metadatas = null
