@@ -111,10 +111,9 @@ french:
 
 Much simpler right?  
 To use the parameter properly, you have to follow a few formatting rules (but don't be scared, they are fairly simple!).
-- Your frames **must** all have the same amount of digit in their name! In our example, they all have 2 digits from 00 to 08. For `{FRAME:000-008}`, it would have been 3 digits, etc.
-- You key and value parameter **has** to be the exact same, otherwise the helper won't know how to do the association. 
-- **Be careful when writing the parameter.** The helper deduce the digit number by looking at the number of digits in the parameter for the starting or ending frame. 
+- Your frames **must** all have the same amount of digit in their name! In our example, they all have 2 digits from 00 to 08. For `{FRAME:000-008}`, it would have been 3 digits, etc.  
 - Parameters **have** to match for both side to make it to work. For example, `Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle{FRAME:00-08}: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle{FRAME:01-07}` won't work.  
+- **Be careful when writing the parameter.** The helper deduce the digit number by looking at the number of digits in the parameter for the starting or ending frame.
   
 If your parameter isn't working, check the logs, when a mismatch happen, the helper logs it.
 Note that the FRAME parameter works with aliases values! So writing something like this will work:
