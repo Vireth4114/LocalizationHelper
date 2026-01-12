@@ -18,21 +18,35 @@ public class TextureTranslator {
                 );
                 return;
             }
-            bool isAliasPresent = MetadatasManager.IsAliasPresent(parsedLanguagesMetadatas);
             foreach (var kv in languages) {
-                if (isAliasPresent) {
-                    MetadatasManager.AssociateAliasWithPath(parsedLanguagesMetadatas["metadatas"]["aliases"], kv, textures);
-                } else {
-                    textures[kv.Key] = kv.Value;
-                }
+                textures[kv.Key] = ApplyTexturesModifiers(kv.Value, parsedLanguagesMetadatas?.GetValueOrDefault("metadatas"));
             }
         } else if (file.TryDeserialize(out Dictionary<string, Dictionary<string, string>> parsedTextures)) {
             foreach (var kv in parsedTextures) {
-                textures[kv.Key] = kv.Value;
+                textures[kv.Key] = ApplyTexturesModifiers(kv.Value);
             }
         } else {
             Logger.Error("LocalizationHelper", $"Failed to parse {file.modAsset.PathVirtual}");
         }
+    }
+
+    /// <summary>
+    /// This method applies all modifiers possible to the given textures. Such as metadatas or parameters.
+    /// This method is non-destructive, it doesn't modify the textures parameter.
+    /// </summary>
+    /// <param name="textures">The textures to apply the modifiers to</param>
+    /// <param name="metadatas">The metadatas to use, if available</param>
+    /// <returns>An updated version of textures</returns>
+    public static Dictionary<string, string> ApplyTexturesModifiers(
+        Dictionary<string, string> textures,
+        Dictionary<string, Dictionary<string, string>> metadatas = null
+    ) {
+        Dictionary<string, string> mappedTextures = [];
+        foreach (var key in textures.Keys) {
+            string keyAliased = MetadatasManager.AssociateAliasWithPath(metadatas?.GetValueOrDefault("aliases"), key);
+            ParametersManager.ApplyParameters(mappedTextures, keyAliased, textures[key]);
+        }
+        return mappedTextures;
     }
 
     public static string GetFullKey(string key, Atlas atlas) {
