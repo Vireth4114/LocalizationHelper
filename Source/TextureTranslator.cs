@@ -42,8 +42,7 @@ public class TextureTranslator {
         Dictionary<string, Dictionary<string, string>> metadatas = null
     ) {
         Dictionary<string, string> mappedTextures = [];
-        foreach (var key in textures.Keys)
-        {
+        foreach (var key in textures.Keys) {
             string keyAliased = MetadatasManager.AssociateAliasWithPath(metadatas?.GetValueOrDefault("aliases"), key);
             ParametersManager.ApplyParameters(mappedTextures, keyAliased, textures[key]);
         }

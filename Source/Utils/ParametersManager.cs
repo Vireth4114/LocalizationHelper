@@ -8,7 +8,7 @@ public partial class ParametersManager {
 
     private static readonly Regex framePattern = FrameRegex();
     
-    [GeneratedRegex(@"\{FRAME:(?<STARTING_FRAME>\d*)\-(?<ENDING_FRAME>\d*)\}")]
+    [GeneratedRegex(@"\{FRAME:(?<STARTING_FRAME>\d+)\-(?<ENDING_FRAME>\d+)\}")]
     private static partial Regex FrameRegex();
     
     /// <summary>

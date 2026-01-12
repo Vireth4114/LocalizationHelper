@@ -14,6 +14,6 @@ public class MetadatasManager {
         Dictionary<string, string> aliases,
         string path
     ) {
-        return aliases.GetValueOrDefault(path) ?? path;
+        return aliases?.GetValueOrDefault(path) ?? path;
     }
 }
