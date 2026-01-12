@@ -10,15 +10,7 @@ languages:
     flags_canada: Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/france
     country_text: Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/france
     Graphics/Atlases/Gameplay/bgs/Vireth/LocalizationHelper/background: Graphics/Atlases/Gameplay/bgs/Vireth/LocalizationHelper/french_background
-    Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle00: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle00
-    Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle01: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle01
-    Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle02: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle02
-    Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle03: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle03
-    Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle04: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle04
-    Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle05: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle05
-    Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle06: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle06
-    Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle07: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle07
-    Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle08: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle08
+    Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle{FRAME:00-08}: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle{FRAME:00-08}
   german:
     flags_canada: Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/germany
     country_text: Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/germany

@@ -18,21 +18,29 @@ public class TextureTranslator {
                 );
                 return;
             }
-            bool isAliasPresent = MetadatasManager.IsAliasPresent(parsedLanguagesMetadatas);
             foreach (var kv in languages) {
-                if (isAliasPresent) {
-                    MetadatasManager.AssociateAliasWithPath(parsedLanguagesMetadatas["metadatas"]["aliases"], kv, textures);
-                } else {
-                    textures[kv.Key] = kv.Value;
-                }
+                textures[kv.Key] = ApplyTexturesModifiers(kv.Value, parsedLanguagesMetadatas?.GetValueOrDefault("metadatas"));
             }
         } else if (file.TryDeserialize(out Dictionary<string, Dictionary<string, string>> parsedTextures)) {
             foreach (var kv in parsedTextures) {
-                textures[kv.Key] = kv.Value;
+                textures[kv.Key] = ApplyTexturesModifiers(kv.Value);
             }
         } else {
             Logger.Error("LocalizationHelper", $"Failed to parse {file.modAsset.PathVirtual}");
         }
+    }
+
+    public static Dictionary<string, string> ApplyTexturesModifiers(
+        Dictionary<string, string> textures,
+        Dictionary<string, Dictionary<string, string>> metadatas = null
+    ) {
+        Dictionary<string, string> mappedTextures = [];
+        foreach (var key in textures.Keys)
+        {
+            string keyAliased = MetadatasManager.AssociateAliasWithPath(metadatas?.GetValueOrDefault("aliases"), key);
+            ParametersManager.ApplyParameters(mappedTextures, keyAliased, textures[key]);
+        }
+        return mappedTextures;
     }
 
     public static string GetFullKey(string key, Atlas atlas) {
