@@ -9,6 +9,7 @@ Helper to localize textures in your mods
   - [Advanced format](#Advanced-format)
     - [Aliases](#Aliases)
     - [Frame handling](#Frame-handling)
+    - [Numbers](#Numbers)
 - [Language IDs](#Language-IDs)
 
 ## Usage
@@ -125,6 +126,11 @@ languages:
   french:
     idle_anim: my/path/idle_french{FRAME:00-08}
 ```
+
+#### Numbers
+
+Works exactly like Frame handling, but instead of `{FRAME:STARTING_FRAME_NUMBER-ENDING_FRAME_NUMBER}` it's `{NUMBER:STARTING_NUMBER-ENDING_NUMBER}`. This parameter exist purely for clarity for cases where assets are numbered but aren't part of an animation.  
+While FRAME and NUMBER parameters do the exact same thing, we encourage you to use them accordingly to animation/numbering to make your .yaml file easier to understand!
 
 ## Language IDs
 

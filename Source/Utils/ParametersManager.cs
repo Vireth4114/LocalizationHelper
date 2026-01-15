@@ -6,10 +6,14 @@ namespace Celeste.Mod.LocalizationHelper.Utils;
 
 public partial class ParametersManager {
 
+    private static readonly Regex numberPattern = NumberRegex();
     private static readonly Regex framePattern = FrameRegex();
     
     [GeneratedRegex(@"\{FRAME:(?<STARTING_FRAME>\d+)\-(?<ENDING_FRAME>\d+)\}")]
     private static partial Regex FrameRegex();
+    
+    [GeneratedRegex(@"\{NUMBER:(?<STARTING_NUMBER>\d+)\-(?<ENDING_NUMBER>\d+)\}")]
+    private static partial Regex NumberRegex();
     
     /// <summary>
     /// Verify if the given parameter is present in the given strings.
@@ -23,6 +27,9 @@ public partial class ParametersManager {
         Regex pattern = null;
         if (parameter.Equals("FRAME")) {
             pattern = framePattern;
+        } else if (parameter.Equals("NUMBER"))
+        {
+            pattern = numberPattern;
         }
         return pattern.IsMatch(key) && pattern.IsMatch(value);
     }
@@ -36,9 +43,9 @@ public partial class ParametersManager {
     /// <param name="textures">The textures dictionnary to update the parameter with</param>
     /// <param name="key">The key to apply the parameter to</param>
     /// <param name="value">The value to apply the parameter to</param>
-    private static void ApplyFrameParameter(Dictionary<string, string> textures, string key, string value) {
-        Match keyMatch = framePattern.Match(key);
-        Match valueMatch = framePattern.Match(value);
+    private static void ApplyFrameParameter(Dictionary<string, string> textures, string key, string value, Regex pattern) {
+        Match keyMatch = pattern.Match(key);
+        Match valueMatch = pattern.Match(value);
         int keyBeginningFrame = int.Parse(keyMatch.Groups[1].Value);
         int keyEndingFrame = int.Parse(keyMatch.Groups[2].Value);
         int keyNumberDigits = keyMatch.Groups[2].Value.Length;
@@ -57,7 +64,7 @@ public partial class ParametersManager {
         }
         for (int i = keyBeginningFrame; i <= keyEndingFrame; i++) {
             string number = i.ToString($"D{keyNumberDigits}");
-            textures.Add(framePattern.Replace(key, number), framePattern.Replace(value, number));
+            textures.Add(pattern.Replace(key, number), pattern.Replace(value, number));
         }
     }
 
@@ -69,7 +76,9 @@ public partial class ParametersManager {
     /// <param name="value">The value to apply the parameters to</param>
     public static void ApplyParameters(Dictionary<string, string> textures, string key, string value) {
         if (IsParameterPresent("FRAME", key, value)) {
-            ApplyFrameParameter(textures, key, value);
+            ApplyFrameParameter(textures, key, value, framePattern);
+        } else if (IsParameterPresent("NUMBER", key, value)) {
+            ApplyFrameParameter(textures, key, value, numberPattern);
         } else {
             textures.Add(key, value);
         }
