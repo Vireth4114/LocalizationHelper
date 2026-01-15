@@ -27,8 +27,7 @@ public partial class ParametersManager {
         Regex pattern = null;
         if (parameter.Equals("FRAME")) {
             pattern = framePattern;
-        } else if (parameter.Equals("NUMBER"))
-        {
+        } else if (parameter.Equals("NUMBER")) {
             pattern = numberPattern;
         }
         return pattern.IsMatch(key) && pattern.IsMatch(value);
