@@ -10,7 +10,8 @@ languages:
     flags_canada: Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/france
     country_text: Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/france
     Graphics/Atlases/Gameplay/bgs/Vireth/LocalizationHelper/background: Graphics/Atlases/Gameplay/bgs/Vireth/LocalizationHelper/french_background
-    Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle{FRAME:00-08}: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle{FRAME:00-08}
+    Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle{FRAME:00-04}: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle{FRAME:00-04}
+    Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle{NUMBER:05-08}: Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle{NUMBER:05-08}
   german:
     flags_canada: Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/germany
     country_text: Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/germany
