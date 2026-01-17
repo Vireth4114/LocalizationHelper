@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Celeste.Mod.LocalizationHelper.Utils.Parameters;

@@ -18,8 +18,9 @@ public class TextureTranslator {
                 );
                 return;
             }
+            MetadatasManager.SetMetadatas(parsedLanguagesMetadatas?.GetValueOrDefault("metadatas"));
             foreach (var kv in languages) {
-                textures[kv.Key] = ApplyTexturesModifiers(kv.Value, parsedLanguagesMetadatas?.GetValueOrDefault("metadatas"));
+                textures[kv.Key] = ApplyTexturesModifiers(kv.Value);
             }
         } else if (file.TryDeserialize(out Dictionary<string, Dictionary<string, string>> parsedTextures)) {
             foreach (var kv in parsedTextures) {
@@ -38,12 +39,11 @@ public class TextureTranslator {
     /// <param name="metadatas">The metadatas to use, if available</param>
     /// <returns>An updated version of textures</returns>
     public static Dictionary<string, string> ApplyTexturesModifiers(
-        Dictionary<string, string> textures,
-        Dictionary<string, Dictionary<string, string>> metadatas = null
+        Dictionary<string, string> textures
     ) {
         Dictionary<string, string> mappedTextures = [];
         foreach (var key in textures.Keys) {
-            string keyAliased = MetadatasManager.AssociateAliasWithPath(metadatas?.GetValueOrDefault("aliases"), key);
+            string keyAliased = MetadatasManager.AssociateAliasWithPath(key);
             Dictionary<string, string> texturesParamApplied = ParametersManager.ApplyParameters(keyAliased, textures[key]);
             foreach (var texture in texturesParamApplied) {
                 mappedTextures.Add(texture.Key, texture.Value);

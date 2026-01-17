@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Celeste.Mod.LocalizationHelper.Utils.Parameters;
 
 namespace Celeste.Mod.LocalizationHelper.Utils;
@@ -11,6 +10,7 @@ public partial class ParametersManager {
     /// <returns>A dictionary mapping a parameter's name with an instance of its class.</returns>
     private static Dictionary<string, IParameter> GetAllParameters() {
         Dictionary<string, IParameter> parameters = [];
+        parameters.Add("PATH", new PathParameter());
         parameters.Add("FRAME", new FrameParameter());
         parameters.Add("NUMBER", new NumberParameter());
         return parameters;
