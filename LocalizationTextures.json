@@ -1,49 +1,55 @@
 {
   "metadatas": {
+    "paths": {
+      "flags": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags",
+      "country_texts": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts",
+      "loc_helper_bgs": "Graphics/Atlases/Gameplay/bgs/Vireth/LocalizationHelper",
+      "loc_helper_characters": "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper"
+    },
     "aliases": {
-      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/canada",
-      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/canada"
+      "flags_canada": "{PATH:flags}/canada",
+      "country_text": "{PATH:country_texts}/canada"
     }
   },
   "languages": {
     "brazilian": {
-      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/brazil",
-      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/brazil"
+      "flags_canada": "{PATH:flags}/brazil",
+      "country_text": "{PATH:country_texts}/brazil"
     },
     "french": {
-      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/france",
-      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/france",
-      "Graphics/Atlases/Gameplay/bgs/Vireth/LocalizationHelper/background": "Graphics/Atlases/Gameplay/bgs/Vireth/LocalizationHelper/french_background",
-      "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle{FRAME:00-08}": "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/french_bleh/idle{FRAME:00-08}"
+      "flags_canada": "{PATH:flags}/france",
+      "country_text": "{PATH:country_texts}/france",
+      "{PATH:loc_helper_bgs}/background": "{PATH:loc_helper_bgs}/french_background",
+      "{PATH:loc_helper_characters}/bleh/idle{FRAME:00-08}": "{PATH:loc_helper_characters}/french_bleh/idle{FRAME:00-08}"
     },
     "german": {
-      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/germany",
-      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/germany"
+      "flags_canada": "{PATH:flags}/germany",
+      "country_text": "{PATH:country_texts}/germany"
     },
     "italian": {
-      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/italy",
-      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/italy"
+      "flags_canada": "{PATH:flags}/italy",
+      "country_text": "{PATH:country_texts}/italy"
     },
     "japanese": {
-      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/japan",
-      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/japan",
-      "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/bleh/idle03": "Graphics/Atlases/Gameplay/characters/Vireth/LocalizationHelper/japanese_bleh/idle03"
+      "flags_canada": "{PATH:flags}/japan",
+      "country_text": "{PATH:country_texts}/japan",
+      "{PATH:loc_helper_characters}/bleh/idle03": "{PATH:loc_helper_characters}/japanese_bleh/idle03"
     },
     "korean": {
-      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/korea",
-      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/korea"
+      "flags_canada": "{PATH:flags}/korea",
+      "country_text": "{PATH:country_texts}/korea"
     },
     "russian": {
-      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/russia",
-      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/russia"
+      "flags_canada": "{PATH:flags}/russia",
+      "country_text": "{PATH:country_texts}/russia"
     },
     "schinese": {
-      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/china",
-      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/china"
+      "flags_canada": "{PATH:flags}/china",
+      "country_text": "{PATH:country_texts}/china"
     },
     "spanish": {
-      "flags_canada": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags/spain",
-      "country_text": "Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts/spain"
+      "flags_canada": "{PATH:flags}/spain",
+      "country_text": "{PATH:country_texts}/spain"
     }
   }
 }
