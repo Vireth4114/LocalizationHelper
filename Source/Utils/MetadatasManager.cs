@@ -6,6 +6,10 @@ public class MetadatasManager {
 
     private static Dictionary<string, Dictionary<string, string>> metadatas = null;
 
+    /// <summary>
+    /// Method to update the metadatas in the metadatas manager.
+    /// </summary>
+    /// <param name="givenMetadata">The metadatas to save</param>
     public static void SetMetadatas(Dictionary<string, Dictionary<string, string>> givenMetadata) {
         metadatas = givenMetadata;
     }

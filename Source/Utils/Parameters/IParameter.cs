@@ -5,9 +5,7 @@ namespace Celeste.Mod.LocalizationHelper.Utils.Parameters;
 interface IParameter {
     /// <summary>
     /// Verify if the given parameter is present in the given strings.
-    /// The parameter has to be present in the key AND the value to be valid.
     /// </summary>
-    /// <param name="parameter">The parameter to check</param>
     /// <param name="key">The key to test against</param>
     /// <param name="value">The value to test against</param>
     /// <returns></returns>
