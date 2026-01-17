@@ -78,7 +78,7 @@ Less repetition! The name is clear, the path is only written one time, making it
 
 #### Paths
 
-You may have noticed that aliases aren't perfect. They work only for the origin key and there's still plenty repetitions in the file, that's why the **paths** exist.
+You may have noticed that aliases aren't perfect. They work only for the origin key and there's still plenty of repetitions in the file, that's why the **paths** exist.
 
 *⚠️ Paths require the metadatas structure ⚠️*
 
@@ -99,7 +99,7 @@ languages:
     stuff1: Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/italian_stuff1
 ```
 
-That's why you can use a PATH parameter to reduce the redundancy! Which makes the file looks now like that:
+That's why you can use a PATH parameter to reduce the redundancy! Which makes the file looks like that now:
 
 ```yaml
 metadatas:
@@ -118,7 +118,7 @@ languages:
     stuff1: "{PATH:stuffs}/italian_stuff1"
 ```
 
-Note that you will very likely have to put `"` quotes around it to create a valid .yaml file. We advise you to use an online checker tool to ensure that your file yaml file is properly structured, otherwise the mod won't be able to use it!
+Note that you will very likely have to put `"` quotes around it to create a valid .yaml file. We advise you to use an online checker tool to ensure that your yaml file is properly structured, otherwise the mod won't be able to use it!
 
 #### Frame handling
 
