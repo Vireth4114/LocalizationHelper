@@ -8,6 +8,7 @@ Helper to localize textures in your mods
   - [Simple format](#Simple-format)
   - [Advanced format](#Advanced-format)
     - [Aliases](#Aliases)
+    - [Paths](#Paths)
     - [Frame handling](#Frame-handling)
     - [Numbers](#Numbers)
 - [Language IDs](#Language-IDs)
@@ -74,6 +75,50 @@ languages:
 ```
 
 Less repetition! The name is clear, the path is only written one time, making it easier to update it if needed.
+
+#### Paths
+
+You may have noticed that aliases aren't perfect. They work only for the origin key and there's still plenty of repetitions in the file, that's why the **paths** exist.
+
+*⚠️ Paths require the metadatas structure ⚠️*
+
+Take this LocalizationTextures.yaml below. It's already using the aliases feature, but there's a small issue... `Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs` is repeated waaaay too much our liking.
+
+```yaml
+metadatas:
+  aliases:
+    stuff1: Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/stuff1
+languages:
+  brazilian:
+    stuff1: Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/brazilian_stuff1
+  french:
+    stuff1: Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/french_stuff1
+  german:
+    stuff1: Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/german_stuff1
+  italian:
+    stuff1: Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs/italian_stuff1
+```
+
+That's why you can use a PATH parameter to reduce the redundancy! Which makes the file looks like that now:
+
+```yaml
+metadatas:
+  paths:
+    stuffs: Graphics/Atlases/Gameplay/decals/ExampleMap/stuffs
+  aliases:
+    stuff1: "{PATH:stuffs}/stuff1"
+languages:
+  brazilian:
+    stuff1: "{PATH:stuffs}/brazilian_stuff1"
+  french:
+    stuff1: "{PATH:stuffs}/french_stuff1"
+  german:
+    stuff1: "{PATH:stuffs}/german_stuff1"
+  italian:
+    stuff1: "{PATH:stuffs}/italian_stuff1"
+```
+
+Note that you will very likely have to put `"` quotes around it to create a valid .yaml file. We advise you to use an online checker tool to ensure that your yaml file is properly structured, otherwise the mod won't be able to use it!
 
 #### Frame handling
 
