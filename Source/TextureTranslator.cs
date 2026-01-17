@@ -44,7 +44,10 @@ public class TextureTranslator {
         Dictionary<string, string> mappedTextures = [];
         foreach (var key in textures.Keys) {
             string keyAliased = MetadatasManager.AssociateAliasWithPath(metadatas?.GetValueOrDefault("aliases"), key);
-            ParametersManager.ApplyParameters(mappedTextures, keyAliased, textures[key]);
+            Dictionary<string, string> texturesParamApplied = ParametersManager.ApplyParameters(keyAliased, textures[key]);
+            foreach (var texture in texturesParamApplied) {
+                mappedTextures.Add(texture.Key, texture.Value);
+            }
         }
         return mappedTextures;
     }
