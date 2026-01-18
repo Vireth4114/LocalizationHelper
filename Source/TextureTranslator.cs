@@ -34,15 +34,29 @@ public class TextureTranslator {
                 return;
             }
             MetadatasManager.SetMetadatas(parsedLanguagesMetadatas?.GetValueOrDefault("metadatas"));
-            foreach (var kv in languages) {
-                textures[kv.Key] = ApplyTexturesModifiers(kv.Value);
-            }
+            UpdateTextures(languages);
         } else if (file.TryDeserialize(out Dictionary<string, Dictionary<string, string>> parsedTextures)) {
-            foreach (var kv in parsedTextures) {
-                textures[kv.Key] = ApplyTexturesModifiers(kv.Value);
-            }
+            UpdateTextures(parsedTextures);
         } else {
             Logger.Error("LocalizationHelper", $"Failed to parse {file.modAsset.PathVirtual}");
+        }
+    }
+
+
+    /// <summary>
+    /// This method updates the instance textures with the given textures map by language.
+    /// It merges the new textures with the existing ones.
+    /// </summary>
+    /// <param name="texturesMapByLanguage">New parsed textures to update textures</param>
+    public void UpdateTextures(Dictionary<string, Dictionary<string, string>> texturesMapByLanguage) {
+        foreach (var kv in texturesMapByLanguage) {
+            if (!textures.ContainsKey(kv.Key)) {
+                textures[kv.Key] = [];
+            }
+            var mappedTextures = ApplyTexturesModifiers(kv.Value);
+            foreach (var texture in mappedTextures) {
+                textures[kv.Key][texture.Key] = texture.Value;
+            }
         }
     }
 
