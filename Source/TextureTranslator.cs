@@ -42,6 +42,12 @@ public class TextureTranslator {
         }
     }
 
+
+    /// <summary>
+    /// This method updates the instance textures with the given textures map by language.
+    /// It merges the new textures with the existing ones.
+    /// </summary>
+    /// <param name="texturesMapByLanguage">New parsed textures to update textures</param>
     public void UpdateTextures(Dictionary<string, Dictionary<string, string>> texturesMapByLanguage) {
         foreach (var kv in texturesMapByLanguage) {
             if (!textures.ContainsKey(kv.Key)) {
@@ -49,7 +55,6 @@ public class TextureTranslator {
             }
             var mappedTextures = ApplyTexturesModifiers(kv.Value);
             foreach (var texture in mappedTextures) {
-                Logger.Info("LocalizationHelper", $"Mapping texture for language '{kv.Key}': '{texture.Key}' -> '{texture.Value}'");
                 textures[kv.Key][texture.Key] = texture.Value;
             }
         }
