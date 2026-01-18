@@ -3,3 +3,5 @@ Vireth_LocalizationHelper_Bleh=
 Je suis bleu
 [MADELINE left normal]
 bleh
+
+ASSETRELOADHELPER_RELOADING_LOCALIZATIONTEXTURES=Rechargement de la configuration LocalizationHelper
