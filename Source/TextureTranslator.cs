@@ -8,6 +8,25 @@ namespace Celeste.Mod.LocalizationHelper;
 public class TextureTranslator {
     private readonly Dictionary<string, Dictionary<string, string>> textures = [];
 
+    public void ReloadLocalizationTextures(ModAsset asset) {
+        textures.Clear();
+        if (asset.PathVirtual.EndsWith(".json")) {
+            AddToTextureMap(new JsonLocalizationFile(asset));
+        } else {
+            AddToTextureMap(new LocalizationFile(asset));
+        }
+        ResetAllAtlasCaches();
+    }
+
+    public static void ResetAllAtlasCaches() {
+        GFX.Game.ResetCaches();
+        GFX.Gui.ResetCaches();
+        GFX.Opening.ResetCaches();
+        GFX.Misc.ResetCaches();
+        GFX.Portraits.ResetCaches();
+        GFX.ColorGrades.ResetCaches();
+    }
+
     public void AddToTextureMap(LocalizationFile file) {
         if (file.TryDeserialize(out Dictionary<string, Dictionary<string, Dictionary<string, string>>> parsedLanguagesMetadatas)) {
             // If the file contains 3 levels of deepness, we consider they have adopted the metadatas/languages structure and handle the file accordingly

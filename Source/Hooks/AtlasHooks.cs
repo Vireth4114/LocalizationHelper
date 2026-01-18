@@ -6,7 +6,7 @@ using Monocle;
 using MonoMod.Cil;
 using MonoMod.RuntimeDetour;
 
-namespace Celeste.Mod.LocalizationHelper;
+namespace Celeste.Mod.LocalizationHelper.Hooks;
 
 public static class AtlasHooks {
     private static Hook hook_AtlasGetItem;

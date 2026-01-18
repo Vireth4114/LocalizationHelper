@@ -8,3 +8,5 @@ I don't even have a portrait
 I guess you're here to test animated sprites
 [??? right normal]
 Yep, did you know I'm blue in French ?{n}And I have a super secret frame in japanese
+
+ASSETRELOADHELPER_RELOADING_LOCALIZATIONTEXTURES=Reloading LocalizationHelper config
