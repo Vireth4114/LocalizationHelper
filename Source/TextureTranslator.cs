@@ -34,15 +34,24 @@ public class TextureTranslator {
                 return;
             }
             MetadatasManager.SetMetadatas(parsedLanguagesMetadatas?.GetValueOrDefault("metadatas"));
-            foreach (var kv in languages) {
-                textures[kv.Key] = ApplyTexturesModifiers(kv.Value);
-            }
+            UpdateTextures(languages);
         } else if (file.TryDeserialize(out Dictionary<string, Dictionary<string, string>> parsedTextures)) {
-            foreach (var kv in parsedTextures) {
-                textures[kv.Key] = ApplyTexturesModifiers(kv.Value);
-            }
+            UpdateTextures(parsedTextures);
         } else {
             Logger.Error("LocalizationHelper", $"Failed to parse {file.modAsset.PathVirtual}");
+        }
+    }
+
+    public void UpdateTextures(Dictionary<string, Dictionary<string, string>> texturesMapByLanguage) {
+        foreach (var kv in texturesMapByLanguage) {
+            if (!textures.ContainsKey(kv.Key)) {
+                textures[kv.Key] = [];
+            }
+            var mappedTextures = ApplyTexturesModifiers(kv.Value);
+            foreach (var texture in mappedTextures) {
+                Logger.Info("LocalizationHelper", $"Mapping texture for language '{kv.Key}': '{texture.Key}' -> '{texture.Value}'");
+                textures[kv.Key][texture.Key] = texture.Value;
+            }
         }
     }
 
