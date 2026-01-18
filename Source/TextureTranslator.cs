@@ -8,13 +8,9 @@ namespace Celeste.Mod.LocalizationHelper;
 public class TextureTranslator {
     private readonly Dictionary<string, Dictionary<string, string>> textures = [];
 
-    public void ReloadLocalizationTextures(ModAsset asset) {
+    public void ReloadLocalizationTextures(LocalizationFile asset) {
         textures.Clear();
-        if (asset.PathVirtual.EndsWith(".json")) {
-            AddToTextureMap(new JsonLocalizationFile(asset));
-        } else {
-            AddToTextureMap(new LocalizationFile(asset));
-        }
+        AddToTextureMap(asset);
         ResetAllAtlasCaches();
     }
 
