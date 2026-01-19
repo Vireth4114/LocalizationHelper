@@ -199,7 +199,7 @@ languages:
     country_text: "{PATH:country_texts}/france"
 ```
 
-Note that positions support aliases, but aren't mandatory. You can use the `positions` section without the `metadatas` section.
+Note that positions support aliases, but aren't mandatory. You can use the `positions` section without the `metadatas` section. Position is **relative** to the original asset placement. Currently only decals are supported, if you happen to need to reposition something that is not decal, please open an issue.
 
 ## Language IDs
 
