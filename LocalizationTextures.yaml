@@ -7,6 +7,9 @@ metadatas:
   aliases:
     flags_canada: "{PATH:flags}/canada"
     country_text: "{PATH:country_texts}/canada"
+positions:
+  french:
+    flags_canada: 0,-20
 languages:
   brazilian:
     flags_canada: "{PATH:flags}/brazil"

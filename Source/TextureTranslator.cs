@@ -34,9 +34,14 @@ public class TextureTranslator {
                 return;
             }
             MetadatasManager.SetMetadatas(parsedLanguagesMetadatas?.GetValueOrDefault("metadatas"));
-            UpdateTextures(languages);
+            UpdateTextures(textures, languages);
+            if (parsedLanguagesMetadatas.TryGetValue("positions", out Dictionary<string, Dictionary<string, string>> positionsMapping)) {
+                Dictionary<string, Dictionary<string, string>> positions = [];
+                UpdateTextures(positions, positionsMapping);
+                PositionsManager.SetPositions(positions);
+            }
         } else if (file.TryDeserialize(out Dictionary<string, Dictionary<string, string>> parsedTextures)) {
-            UpdateTextures(parsedTextures);
+            UpdateTextures(textures, parsedTextures);
         } else {
             Logger.Error("LocalizationHelper", $"Failed to parse {file.modAsset.PathVirtual}");
         }
@@ -44,18 +49,19 @@ public class TextureTranslator {
 
 
     /// <summary>
-    /// This method updates the instance textures with the given textures map by language.
+    /// This method updates the given dictionary with the given textures map by language.
     /// It merges the new textures with the existing ones.
     /// </summary>
+    /// <param name="dictionaryToUpdate">The dictionary to update with the textures</param>
     /// <param name="texturesMapByLanguage">New parsed textures to update textures</param>
-    public void UpdateTextures(Dictionary<string, Dictionary<string, string>> texturesMapByLanguage) {
+    public static void UpdateTextures(Dictionary<string, Dictionary<string, string>> dictionaryToUpdate, Dictionary<string, Dictionary<string, string>> texturesMapByLanguage) {
         foreach (var kv in texturesMapByLanguage) {
-            if (!textures.ContainsKey(kv.Key)) {
-                textures[kv.Key] = [];
+            if (!dictionaryToUpdate.TryGetValue(kv.Key, out Dictionary<string,string> _)) {
+                dictionaryToUpdate[kv.Key] = [];
             }
             var mappedTextures = ApplyTexturesModifiers(kv.Value);
             foreach (var texture in mappedTextures) {
-                textures[kv.Key][texture.Key] = texture.Value;
+                dictionaryToUpdate[kv.Key][texture.Key] = texture.Value;
             }
         }
     }

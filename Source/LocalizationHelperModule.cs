@@ -12,12 +12,14 @@ public class LocalizationHelperModule : EverestModule {
 
     public override void Load() {
         Hooks.AtlasHooks.Load();
+        Hooks.DecalHooks.Load();
         Hooks.LanguageHooks.Load();
         Hooks.EverestHooks.Load();
     }
 
     public override void Unload() {
         Hooks.AtlasHooks.Unload();
+        Hooks.DecalHooks.Unload();
         Hooks.LanguageHooks.Unload();
         Hooks.EverestHooks.Unload();
     }
