@@ -11,7 +11,14 @@ public class MetadatasManager {
     /// </summary>
     /// <param name="givenMetadata">The metadatas to save</param>
     public static void SetMetadatas(Dictionary<string, Dictionary<string, string>> givenMetadata) {
-        metadatas = givenMetadata;
+        foreach (var language in givenMetadata) {
+            if (!metadatas.TryGetValue(language.Key, out Dictionary<string, string> value)) {
+                metadatas[language.Key] = [];
+            }
+            foreach (var metadatasMapping in language.Value) {
+                metadatas[language.Key][metadatasMapping.Key] = metadatasMapping.Value;
+            }
+        }
     }
 
     /// <summary>
