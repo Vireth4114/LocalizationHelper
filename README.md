@@ -11,6 +11,7 @@ Helper to localize textures in your mods
     - [Paths](#Paths)
     - [Frame handling](#Frame-handling)
     - [Numbers](#Numbers)
+  - [Position](#Position)
 - [Language IDs](#Language-IDs)
 
 ## Usage
@@ -176,6 +177,29 @@ languages:
 
 Works exactly like Frame handling, but instead of `{FRAME:STARTING_FRAME_NUMBER-ENDING_FRAME_NUMBER}` it's `{NUMBER:STARTING_NUMBER-ENDING_NUMBER}`. This parameter exist purely for clarity for cases where assets are numbered but aren't part of an animation.  
 While FRAME and NUMBER parameters do the exact same thing, we encourage you to use them accordingly to animation/numbering to make your .yaml file easier to understand!
+
+### Position
+
+Sometimes when doing localization, you need to adjust assets position to fit localization and the map itself. In order to do that, like the `metadatas` section, you need to add a `positions` section. Here's an example:  
+
+```yaml
+metadatas:
+  paths:
+    flags: Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/flags
+    country_texts: Graphics/Atlases/Gameplay/decals/Vireth/LocalizationHelper/countryTexts
+  aliases:
+    flags_canada: "{PATH:flags}/canada"
+    country_text: "{PATH:country_texts}/canada"
+positions:
+  french:
+    flags_canada: 0,-20
+languages:
+  french:
+    flags_canada: "{PATH:flags}/france"
+    country_text: "{PATH:country_texts}/france"
+```
+
+Note that positions support aliases, but aren't mandatory. You can use the `positions` section without the `metadatas` section.
 
 ## Language IDs
 
