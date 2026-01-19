@@ -32,12 +32,12 @@ public class PositionsManager {
 
     /// <summary>
     /// Retrieve the position wanted for the given keyname.
-    /// If no position found, return a Vector2(0,0).
+    /// If no position found, return a Vector2.Zero.
     /// </summary>
     /// <param name="keyname">The keyname we want to check</param>
     public static Vector2 RetrievePosition(string keyname) {
         Language lang = Dialog.Language;
-        if (lang == null) return new Vector2(0,0);
-        return positions?.GetValueOrDefault(lang.Id)?.GetValueOrDefault(keyname) ?? new Vector2(0,0);
+        if (lang == null) return Vector2.Zero;
+        return positions?.GetValueOrDefault(lang.Id)?.GetValueOrDefault(keyname) ?? Vector2.Zero;
     }
 }
