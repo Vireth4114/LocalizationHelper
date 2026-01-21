@@ -4,7 +4,7 @@ namespace Celeste.Mod.LocalizationHelper.Utils;
 
 public class MetadatasManager {
 
-    private static Dictionary<string, Dictionary<string, string>> metadatas = null;
+    private static Dictionary<string, Dictionary<string, string>> metadatas = [];
 
     /// <summary>
     /// Method to update the metadatas in the metadatas manager.
