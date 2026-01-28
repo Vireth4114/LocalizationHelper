@@ -31,6 +31,13 @@ public class PositionsManager {
     }
 
     /// <summary>
+    /// Clear all saved positions.
+    /// </summary>
+    public static void ClearPositions() {
+        positions.Clear();
+    }
+
+    /// <summary>
     /// Retrieve the position wanted for the given keyname.
     /// If no position found, return a Vector2.Zero.
     /// </summary>

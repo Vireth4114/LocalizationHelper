@@ -22,6 +22,13 @@ public class MetadatasManager {
     }
 
     /// <summary>
+    /// Clear all saved metadatas.
+    /// </summary>
+    public static void ClearMetadatas() {
+        metadatas.Clear();
+    }
+
+    /// <summary>
     /// This method associate the path from an alias under metadatas/aliases and return the actual path.
     /// If no alias found, return the given path.
     /// </summary>
