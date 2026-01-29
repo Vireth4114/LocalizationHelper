@@ -8,10 +8,14 @@ namespace Celeste.Mod.LocalizationHelper;
 public class TextureTranslator {
     private readonly Dictionary<string, Dictionary<string, string>> textures = [];
 
-    public void ReloadLocalizationTextures(LocalizationFile asset) {
+    public void ReloadLocalizationTextures(IEnumerable<LocalizationFile> assets) {
         textures.Clear();
-        AddToTextureMap(asset);
+        MetadatasManager.ClearMetadatas();
+        PositionsManager.ClearPositions();
         ResetAllAtlasCaches();
+        foreach (var asset in assets) {
+            AddToTextureMap(asset);
+        }
     }
 
     public static void ResetAllAtlasCaches() {
