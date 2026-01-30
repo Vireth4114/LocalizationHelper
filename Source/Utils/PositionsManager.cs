@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
 using Microsoft.Xna.Framework;
 
 namespace Celeste.Mod.LocalizationHelper.Utils;
@@ -38,13 +40,18 @@ public class PositionsManager {
     }
 
     /// <summary>
-    /// Retrieve the position wanted for the given keyname.
+    /// Retrieve the position wanted for the given texture.
     /// If no position found, return a Vector2.Zero.
     /// </summary>
-    /// <param name="keyname">The keyname we want to check</param>
-    public static Vector2 RetrievePosition(string keyname) {
+    /// <param name="texture">The texture we want to check, may have an extension, be a full path, or relative to decal</param>
+    public static Vector2 RetrievePosition(string texture) {
         Language lang = Dialog.Language;
         if (lang == null) return Vector2.Zero;
-        return positions?.GetValueOrDefault(lang.Id)?.GetValueOrDefault(keyname) ?? Vector2.Zero;
+        string keyname = texture.Replace(Path.GetExtension(texture), "");
+        string withPathKeyname = TextureTranslator.GetFullKey(Path.Combine("decals/", keyname), GFX.Game);
+        Logger.Info("l10n", keyname+" | "+withPathKeyname);
+        return positions?.GetValueOrDefault(lang.Id)?.GetValueOrDefault(keyname) 
+            ?? positions?.GetValueOrDefault(lang.Id)?.GetValueOrDefault(withPathKeyname) 
+            ?? Vector2.Zero;
     }
 }
