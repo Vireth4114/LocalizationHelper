@@ -192,14 +192,14 @@ metadatas:
     country_text: "{PATH:country_texts}/canada"
 positions:
   french:
-    flags_canada: 0,-20
+    Vireth/LocalizationHelper/flags: 0,-20
 languages:
   french:
     flags_canada: "{PATH:flags}/france"
     country_text: "{PATH:country_texts}/france"
 ```
 
-Note that positions support aliases, but aren't mandatory. You can use the `positions` section without the `metadatas` section. Position is **relative** to the original asset placement. Currently only decals are supported, if you happen to need to reposition something that is not decal, please open an issue.
+Note that currently, positions only support decals. The texture key that should be passed should be the texture string passed to the decal in Lönn. If you happen to need to reposition something that is not decal, please open an issue.
 
 ## Language IDs
 
