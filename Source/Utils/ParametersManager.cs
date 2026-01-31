@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Celeste.Mod.LocalizationHelper.Utils.Parameters;
 
@@ -22,11 +23,12 @@ public partial class ParametersManager {
     /// <param name="key">The key to apply the parameters to</param>
     /// <param name="value">The value to apply the parameters to</param>
     public static Dictionary<string, string> ApplyParameters(string key, string value) {
-        Dictionary<string, string> textures = [];
-        textures.Add(key, value);
+        Dictionary<string, string> textures = new(StringComparer.OrdinalIgnoreCase){
+            { key, value }
+        };
         foreach (var parameter in GetAllParameters()) {
             IParameter parameterInstance = parameter.Value;
-            Dictionary<string, string> newlyGeneratedTextures = [];            
+            Dictionary<string, string> newlyGeneratedTextures = new(StringComparer.OrdinalIgnoreCase);            
             foreach (var texture in textures) {
                 if (parameterInstance.IsParameterPresent(texture.Key, texture.Value)) {
                     parameterInstance.ApplyParameter(newlyGeneratedTextures, texture.Key, texture.Value);

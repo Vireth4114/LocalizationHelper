@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Celeste.Mod.LocalizationHelper.Utils;
@@ -13,7 +14,7 @@ public class MetadatasManager {
     public static void SetMetadatas(Dictionary<string, Dictionary<string, string>> givenMetadata) {
         foreach (var language in givenMetadata) {
             if (!metadatas.TryGetValue(language.Key, out Dictionary<string, string> value)) {
-                metadatas[language.Key] = [];
+                metadatas[language.Key] = new(StringComparer.OrdinalIgnoreCase);
             }
             foreach (var metadatasMapping in language.Value) {
                 metadatas[language.Key][metadatasMapping.Key] = metadatasMapping.Value;

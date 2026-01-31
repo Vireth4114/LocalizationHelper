@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Monocle;
 using Celeste.Mod.LocalizationHelper.Formats;
 using Celeste.Mod.LocalizationHelper.Utils;
+using System;
 
 namespace Celeste.Mod.LocalizationHelper;
 
@@ -30,24 +31,43 @@ public class TextureTranslator {
     public void AddToTextureMap(LocalizationFile file) {
         if (file.TryDeserialize(out Dictionary<string, Dictionary<string, Dictionary<string, string>>> parsedLanguagesMetadatas)) {
             // If the file contains 3 levels of deepness, we consider they have adopted the metadatas/languages structure and handle the file accordingly
-            if (!parsedLanguagesMetadatas.TryGetValue("languages", out Dictionary<string, Dictionary<string, string>> languages)) {
+            if (!parsedLanguagesMetadatas.TryGetValue("languages", out Dictionary<string, Dictionary<string, string>> _)) {
                 Logger.Error("LocalizationHelper", 
                     "The \"languages\" key is missing. Probably written with a typo. " + 
                     "Make sure your translated languages are under this key if you're using the format with the metadatas key."
                 );
                 return;
             }
+            foreach (var dictionary in parsedLanguagesMetadatas.Values) {
+                MakeTextureDictionaryCaseInsensitive(dictionary);
+            }
             MetadatasManager.SetMetadatas(parsedLanguagesMetadatas?.GetValueOrDefault("metadatas"));
-            UpdateTextures(textures, languages);
+            UpdateTextures(textures, parsedLanguagesMetadatas["languages"]);
             if (parsedLanguagesMetadatas.TryGetValue("positions", out Dictionary<string, Dictionary<string, string>> positionsMapping)) {
                 Dictionary<string, Dictionary<string, string>> positions = [];
                 UpdateTextures(positions, positionsMapping);
                 PositionsManager.SetPositions(positions);
             }
         } else if (file.TryDeserialize(out Dictionary<string, Dictionary<string, string>> parsedTextures)) {
+            MakeTextureDictionaryCaseInsensitive(parsedTextures);
             UpdateTextures(textures, parsedTextures);
         } else {
             Logger.Error("LocalizationHelper", $"Failed to parse {file.modAsset.PathVirtual}");
+        }
+    }
+
+    /// <summary>
+    /// This method makes the given texture dictionary case insensitive.
+    /// It modifies the given dictionary in place.
+    /// </summary>
+    /// <param name="dictionary">The dictionary to make texture case insensitive, must have two level of indentation, 
+    /// first level for language or metadata type.</param>
+    public static void MakeTextureDictionaryCaseInsensitive(Dictionary<string, Dictionary<string, string>> dictionary) {
+        var keys = new List<string>(dictionary.Keys);
+        foreach (var key in keys) {
+            var innerDict = dictionary[key];
+            var newInnerDict = new Dictionary<string, string>(innerDict, System.StringComparer.OrdinalIgnoreCase);
+            dictionary[key] = newInnerDict;
         }
     }
 
@@ -61,7 +81,7 @@ public class TextureTranslator {
     public static void UpdateTextures(Dictionary<string, Dictionary<string, string>> dictionaryToUpdate, Dictionary<string, Dictionary<string, string>> texturesMapByLanguage) {
         foreach (var kv in texturesMapByLanguage) {
             if (!dictionaryToUpdate.TryGetValue(kv.Key, out Dictionary<string,string> _)) {
-                dictionaryToUpdate[kv.Key] = [];
+                dictionaryToUpdate[kv.Key] = new(StringComparer.OrdinalIgnoreCase);
             }
             var mappedTextures = ApplyTexturesModifiers(kv.Value);
             foreach (var texture in mappedTextures) {
@@ -80,7 +100,7 @@ public class TextureTranslator {
     public static Dictionary<string, string> ApplyTexturesModifiers(
         Dictionary<string, string> textures
     ) {
-        Dictionary<string, string> mappedTextures = [];
+        Dictionary<string, string> mappedTextures = new(StringComparer.OrdinalIgnoreCase);
         foreach (var key in textures.Keys) {
             string keyAliased = MetadatasManager.AssociateAliasWithPath(key);
             Dictionary<string, string> texturesParamApplied = ParametersManager.ApplyParameters(keyAliased, textures[key]);
@@ -98,7 +118,7 @@ public class TextureTranslator {
 
     public static string GetShortKey(string fullKey, Atlas atlas) {
         string textureFolder = atlas.DataPath.Replace('\\', '/') + "/";
-        if (fullKey.StartsWith(textureFolder)) {
+        if (fullKey.StartsWith(textureFolder, StringComparison.OrdinalIgnoreCase)) {
             return fullKey[textureFolder.Length..];
         }
         return fullKey;
