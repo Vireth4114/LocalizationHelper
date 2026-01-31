@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -16,7 +17,7 @@ public class PositionsManager {
     public static void SetPositions(Dictionary<string, Dictionary<string, string>> givenPosition) {
         foreach (var language in givenPosition) {
             if (!positions.TryGetValue(language.Key, out Dictionary<string, Vector2> value)) {
-                positions[language.Key] = [];
+                positions[language.Key] = new(StringComparer.OrdinalIgnoreCase);
             }
             foreach (var positionsMapping in language.Value)
             {
@@ -49,8 +50,11 @@ public class PositionsManager {
         if (lang == null) return Vector2.Zero;
         string keyname = texture.Replace(Path.GetExtension(texture), "");
         string withPathKeyname = TextureTranslator.GetFullKey(Path.Combine("decals/", keyname), GFX.Game);
-        return positions?.GetValueOrDefault(lang.Id)?.GetValueOrDefault(keyname) 
-            ?? positions?.GetValueOrDefault(lang.Id)?.GetValueOrDefault(withPathKeyname) 
-            ?? Vector2.Zero;
+        Dictionary<string, Vector2> positionsByLang = positions?.GetValueOrDefault(lang.Id);
+        if (positionsByLang == null) return Vector2.Zero;
+        if (positionsByLang.TryGetValue(keyname, out Vector2 position)) {
+            return position;
+        }
+        return positionsByLang.GetValueOrDefault(withPathKeyname, Vector2.Zero);
     }
 }
