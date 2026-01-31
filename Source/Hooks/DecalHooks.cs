@@ -12,7 +12,6 @@ public static class DecalHooks {
     /// </summary>
     private static void Hook_ctor(On.Celeste.Decal.orig_ctor_string_Vector2_Vector2_int orig, Decal self, string texture, Vector2 position, Vector2 scale, int depth) {
         Vector2 posDelta = PositionsManager.RetrievePosition(texture);
-        Logger.Info("LocalizationHelper", $"DecalHooks: Applying position delta {posDelta} for decal '{texture}'");
         Vector2 newPosition = position + posDelta;
         orig(self, texture, newPosition, scale, depth);
     }
