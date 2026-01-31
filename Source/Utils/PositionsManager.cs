@@ -49,7 +49,6 @@ public class PositionsManager {
         if (lang == null) return Vector2.Zero;
         string keyname = texture.Replace(Path.GetExtension(texture), "");
         string withPathKeyname = TextureTranslator.GetFullKey(Path.Combine("decals/", keyname), GFX.Game);
-        Logger.Info("l10n", keyname+" | "+withPathKeyname);
         return positions?.GetValueOrDefault(lang.Id)?.GetValueOrDefault(keyname) 
             ?? positions?.GetValueOrDefault(lang.Id)?.GetValueOrDefault(withPathKeyname) 
             ?? Vector2.Zero;
