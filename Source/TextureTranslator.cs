@@ -3,6 +3,9 @@ using Monocle;
 using Celeste.Mod.LocalizationHelper.Formats;
 using Celeste.Mod.LocalizationHelper.Utils;
 using System;
+using System.IO;
+using System.Reflection;
+using Celeste.Mod.Helpers;
 
 namespace Celeste.Mod.LocalizationHelper;
 
@@ -13,10 +16,15 @@ public class TextureTranslator {
         textures.Clear();
         MetadatasManager.ClearMetadatas();
         PositionsManager.ClearPositions();
-        ResetAllAtlasCaches();
+        ResetCaches();
         foreach (var asset in assets) {
             AddToTextureMap(asset);
         }
+    }
+
+    public static void ResetCaches() {
+        ResetAllAtlasCaches();
+        ResetEmojiCache();
     }
 
     public static void ResetAllAtlasCaches() {
@@ -26,6 +34,17 @@ public class TextureTranslator {
         GFX.Misc.ResetCaches();
         GFX.Portraits.ResetCaches();
         GFX.ColorGrades.ResetCaches();
+    }
+
+    public static void ResetEmojiCache() {
+        try {
+            CacheHelper<string, string> cache = typeof(Emoji).GetField("cachedApplies", BindingFlags.Static | BindingFlags.NonPublic)
+                ?.GetValue(null) as CacheHelper<string, string>;
+            cache.Clear();
+        } catch {
+            Logger.Error("LocalizationHelper", "Could not access Emoji cachedApplies field for cache reset.");
+            return;
+        }
     }
 
     public void AddToTextureMap(LocalizationFile file) {
@@ -133,6 +152,23 @@ public class TextureTranslator {
         string localizedKey = textures?.GetValueOrDefault(lang.Id)?.GetValueOrDefault(GetFullKey(key, atlas));
 
         return localizedKey != null ? GetShortKey(localizedKey, atlas) : key;
+    }
+
+    /// <summary>
+    /// This method returns the localized emoji id for the given emoji id in the dialog.
+    /// </summary>
+    /// <param name="key">emoji id in the dialog</param>
+    /// <returns>The translated emoji id</returns>
+    public string GetLocalizedEmoji(string key) {
+        if (key == null) return null;
+
+        Language lang = Dialog.Language;
+        if (lang == null) return key;
+        string fullKey = GetFullKey(Path.Combine("emoji/", key), GFX.Gui);
+        
+        string localizedKey = textures?.GetValueOrDefault(lang.Id)?.GetValueOrDefault(fullKey);
+
+        return localizedKey != null ? GetShortKey(localizedKey, GFX.Gui)["emoji/".Length..] : key;
     }
 
     public string GetOriginalTextureFromLocalized(string localizedKey, Atlas atlas) {

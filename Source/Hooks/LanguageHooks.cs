@@ -2,7 +2,7 @@ namespace Celeste.Mod.LocalizationHelper.Hooks;
 
 public static class LanguageHooks {
     private static void Hook_ApplyLanguage(On.Celeste.Settings.orig_ApplyLanguage orig, Settings self) {
-        TextureTranslator.ResetAllAtlasCaches();
+        TextureTranslator.ResetCaches();
         orig(self);
     }
 
