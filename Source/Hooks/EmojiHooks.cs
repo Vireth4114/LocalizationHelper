@@ -8,6 +8,12 @@ namespace Celeste.Mod.LocalizationHelper.Hooks;
 public static class EmojiHooks {
     private static ILHook hook_EmojiApply;
 
+    /// <summary>
+    /// Hook to change the emoji texture id when applicable for the localization
+    /// existing code: Emoji._IDs.TryGetValue(key, out int num)
+    /// replaced by: Emoji._IDs.TryGetValue(GetLocalizedEmoji(key), out int num)
+    /// </summary>
+    /// <param name="ctx">IL context</param>
     private static void Hook_EmojiApply(ILContext ctx) {
         var cursor = new ILCursor(ctx);
 
