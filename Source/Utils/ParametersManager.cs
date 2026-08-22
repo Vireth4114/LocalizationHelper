@@ -22,13 +22,13 @@ public partial class ParametersManager {
     /// </summary>
     /// <param name="key">The key to apply the parameters to</param>
     /// <param name="value">The value to apply the parameters to</param>
-    public static Dictionary<string, string> ApplyParameters(string key, string value) {
-        Dictionary<string, string> textures = new(StringComparer.OrdinalIgnoreCase){
+    public static Dictionary<string, object> ApplyParameters(string key, object value) {
+        Dictionary<string, object> textures = new(StringComparer.OrdinalIgnoreCase){
             { key, value }
         };
         foreach (var parameter in GetAllParameters()) {
             IParameter parameterInstance = parameter.Value;
-            Dictionary<string, string> newlyGeneratedTextures = new(StringComparer.OrdinalIgnoreCase);            
+            Dictionary<string, object> newlyGeneratedTextures = new(StringComparer.OrdinalIgnoreCase);            
             foreach (var texture in textures) {
                 if (parameterInstance.IsParameterPresent(texture.Key, texture.Value)) {
                     parameterInstance.ApplyParameter(newlyGeneratedTextures, texture.Key, texture.Value);

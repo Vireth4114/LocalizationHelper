@@ -12,7 +12,7 @@ public class LocalizationHelperModule : EverestModule {
 
     public override void Load() {
         Hooks.AtlasHooks.Load();
-        Hooks.DecalHooks.Load();
+        Hooks.ImageHooks.Load();
         Hooks.LanguageHooks.Load();
         Hooks.EverestHooks.Load();
         Hooks.EmojiHooks.Load();
@@ -20,7 +20,7 @@ public class LocalizationHelperModule : EverestModule {
 
     public override void Unload() {
         Hooks.AtlasHooks.Unload();
-        Hooks.DecalHooks.Unload();
+        Hooks.ImageHooks.Unload();
         Hooks.LanguageHooks.Unload();
         Hooks.EverestHooks.Unload();
         Hooks.EmojiHooks.Unload();
