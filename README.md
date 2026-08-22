@@ -18,6 +18,8 @@ Helper to localize textures in your mods
 
 Put a `LocalizationTextures.yaml` in your mod root folder to specify the new texture for each language.
 
+This helper contains a test map which isn't shown by default, if you want to view it, rename `Maps/localization_test.renametobin` to `Maps/localization_test.bin`
+
 ### Simple format
 
 It has this format:
