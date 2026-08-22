@@ -4,6 +4,7 @@ using Celeste.Mod.LocalizationHelper.Formats;
 using Celeste.Mod.LocalizationHelper.Utils;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Celeste.Mod.Helpers;
 
@@ -113,21 +114,24 @@ public class TextureTranslator {
     /// This method applies all modifiers possible to the given textures. Such as metadatas or parameters.
     /// This method is non-destructive, it doesn't modify the textures parameter.
     /// </summary>
-    /// <param name="textures">The textures to apply the modifiers to</param>
-    /// <param name="metadatas">The metadatas to use, if available</param>
+    /// <param name="textures">The dictionary to apply the modifiers to</param>
     /// <returns>An updated version of textures</returns>
-    public static Dictionary<string, string> ApplyTexturesModifiers(
-        Dictionary<string, string> textures
-    ) {
-        Dictionary<string, string> mappedTextures = new(StringComparer.OrdinalIgnoreCase);
+    public static Dictionary<string, object> ApplyTexturesModifiers(Dictionary<string, object> textures) {
+        Dictionary<string, object> mappedTextures = new(StringComparer.OrdinalIgnoreCase);
         foreach (var key in textures.Keys) {
             string keyAliased = MetadatasManager.AssociateAliasWithPath(key);
-            Dictionary<string, string> texturesParamApplied = ParametersManager.ApplyParameters(keyAliased, textures[key]);
+            Dictionary<string, object> texturesParamApplied = ParametersManager.ApplyParameters(keyAliased, textures[key]);
             foreach (var texture in texturesParamApplied) {
                 mappedTextures.Add(texture.Key, texture.Value);
             }
         }
         return mappedTextures;
+    }
+
+    public static Dictionary<string, T> ApplyTexturesModifiers<T>(Dictionary<string, T> textures) {
+        var objectDictionary = textures.ToDictionary(kv => kv.Key, kv => (object)kv.Value);
+        var modifiedObjectDictionary = ApplyTexturesModifiers(objectDictionary);
+        return modifiedObjectDictionary.ToDictionary(kv => kv.Key, kv => (T)kv.Value);
     }
 
     public static string GetFullKey(string key, Atlas atlas) {

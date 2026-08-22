@@ -9,7 +9,7 @@ metadatas:
     country_text: "{PATH:country_texts}/canada"
 positions:
   french:
-    flags_canada: 0,-20
+    "{PATH:flags}/france": 0,-20
 languages:
   brazilian:
     flags_canada: "{PATH:flags}/brazil"

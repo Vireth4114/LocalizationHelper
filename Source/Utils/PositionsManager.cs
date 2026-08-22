@@ -17,7 +17,7 @@ public class PositionsManager {
     public static void SetPositions(Dictionary<string, Dictionary<string, string>> givenPosition) {
         foreach (var language in givenPosition) {
             if (!positions.TryGetValue(language.Key, out Dictionary<string, Vector2> value)) {
-                positions[language.Key] = new(StringComparer.OrdinalIgnoreCase);
+                positions[language.Key] = new Dictionary<string, Vector2>(StringComparer.OrdinalIgnoreCase);
             }
             foreach (var positionsMapping in language.Value)
             {
@@ -30,6 +30,7 @@ public class PositionsManager {
                     Logger.Error("LocalizationHelper", $"Could not process position for asset {positionsMapping.Key}. Was expecting asset: x,y format.");
                 }
             }
+            positions[language.Key] = TextureTranslator.ApplyTexturesModifiers(positions[language.Key]);
         }
     }
 
@@ -44,17 +45,16 @@ public class PositionsManager {
     /// Retrieve the position wanted for the given texture.
     /// If no position found, return a Vector2.Zero.
     /// </summary>
-    /// <param name="texture">The texture we want to check, may have an extension, be a full path, or relative to decal</param>
+    /// <param name="texture">The texture we want to check, must be a full path</param>
     public static Vector2 RetrievePosition(string texture) {
-        Language lang = Dialog.Language;
-        if (lang == null) return Vector2.Zero;
-        string keyname = texture.Replace(Path.GetExtension(texture), "");
-        string withPathKeyname = TextureTranslator.GetFullKey(Path.Combine("decals/", keyname), GFX.Game);
-        Dictionary<string, Vector2> positionsByLang = positions?.GetValueOrDefault(lang.Id);
-        if (positionsByLang == null) return Vector2.Zero;
-        if (positionsByLang.TryGetValue(keyname, out Vector2 position)) {
-            return position;
+        if (string.IsNullOrEmpty(texture) || Dialog.Language is not { } lang)
+            return Vector2.Zero;
+        if (texture.Contains("idle"))
+        {
+            Logger.Info("l", texture);
         }
-        return positionsByLang.GetValueOrDefault(withPathKeyname, Vector2.Zero);
+        return positions?.GetValueOrDefault(lang.Id)?.TryGetValue(texture, out Vector2 position) == true
+            ? position
+            : Vector2.Zero;
     }
 }
