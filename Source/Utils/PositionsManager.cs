@@ -49,10 +49,6 @@ public class PositionsManager {
     public static Vector2 RetrievePosition(string texture) {
         if (string.IsNullOrEmpty(texture) || Dialog.Language is not { } lang)
             return Vector2.Zero;
-        if (texture.Contains("idle"))
-        {
-            Logger.Info("l", texture);
-        }
         return positions?.GetValueOrDefault(lang.Id)?.TryGetValue(texture, out Vector2 position) == true
             ? position
             : Vector2.Zero;
